@@ -1,5 +1,5 @@
-# puvs5
-Parallele und verteilte Systeme - Übung 5
+# puvs6
+Parallele und verteilte Systeme - Übung 6
 
 
 Das verwendete System für Aufgabe 2 hat folgende Spezifikationen:  
