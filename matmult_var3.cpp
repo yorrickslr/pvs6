@@ -134,8 +134,8 @@ int main(int argc, char** argv)
 
 	/* read user input */
 	d1 = 1000;		// rows of A and C
-	d2 = 1000);     // cols of A and rows of B
-	d3 = 1000);     // cols of B and C
+	d2 = 1000;     // cols of A and rows of B
+	d3 = 1000;     // cols of B and C
 	int d[4] = { 0, d1, d2, d3 };
 	size_t global[1] = { (size_t)d1*d3 };
 
