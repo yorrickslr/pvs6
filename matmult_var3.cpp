@@ -1,9 +1,7 @@
 #include "CL/cl.h"                              
-#include <algorithm>
-#include <cstring>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sstream>
+#include <string.h>
 #include <omp.h>
 
 // ----------------------------------------------------------------------------------
@@ -93,20 +91,6 @@ void print_mat(float **A, int row, int col, char *tag)
 		printf("\n");
 	}
 }
-/*
-int modify_kernel(char *source, int d2) {
-for (int p = 0; p < strlen(source); p++) {
-if ('$' == source[p]) {
-source[p] = ' ';
-std::stringstream pt (d2);
-std::string test << pt;
-
-strncpy(source[p], , size_t num);
-return 0;
-}
-}
-}
-*/
 
 const char *KernelSource =
 "__kernel void matmult_ocl(__global float *A, __global float *B, __global int *d, __global float *C) { \n"
@@ -118,7 +102,7 @@ const char *KernelSource =
 "		tempA[j] = A[shiftA+j];                                                                        \n"
 "	}                                                                                                  \n"
 "	for(int i=0; i<d[2]; i++) {                                                                        \n"
-"		C[id] += tempA[shiftA+i] * B[shiftB+i*d[3]];                                                   \n"
+"		C[id] += tempA[i] * B[shiftB+i*d[3]];                                                   \n"
 "	}                                                                                                  \n"
 "}                                                                                                     \n"
 "\n";
@@ -237,7 +221,6 @@ int main(int argc, char** argv)
 	}
 
 
-
 	kernel = clCreateKernel(program, "matmult_ocl", &err);
 	if (err != CL_SUCCESS) {
 		printf("Error setting kernel. Error: %d\n", err);
@@ -294,3 +277,13 @@ int main(int argc, char** argv)
 	printf("   Speedup = %f\n", serial_time / openCL_time);
 	return 0;
 }
+
+/*
+Matrix sizes C[1000][1000] = A[1000][1000] x B[1000][1000]
+Running serial algorithm...
+Checking results... ok.
+Showing stats...
+serial runtime = 10.092953
+OpenCL runtime = 0.937879
+Speedup = 10.761471
+*/
