@@ -39,4 +39,13 @@ Showing stats...
    serial runtime = 10.664608  
    OpenCL runtime = 0.941198  
    Speedup = 11.330891  
+var4 -> Statt A,B wird privater Speicher tempA, tempB genutzt  
+Zeit:  
+Matrix sizes C[1000][1000] = A[1000][1000] x B[1000][1000]  
+Running serial algorithm...  
+Checking results... error!  
+Showing stats...  
+   serial runtime = 9.872095  
+   OpenCL runtime = 1.292388  
+   Speedup = 7.638646  
 
